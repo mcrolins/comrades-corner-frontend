@@ -1,6 +1,11 @@
-export const DJANGO_API_BASE = process.env.DJANGO_API_BASE;
-if (!DJANGO_API_BASE) {
-  throw new Error("DJANGO_API_BASE is not set");
+function getApiBase() {
+  const base = process.env.DJANGO_API_BASE;
+  if (!base) {
+    throw new Error(
+      "DJANGO_API_BASE is not set. Configure it in your deployment environment variables.",
+    );
+  }
+  return base.replace(/\/$/, "");
 }
 
 export function buildQuery(params: Record<string, any> = {}) {
@@ -14,7 +19,7 @@ export function buildQuery(params: Record<string, any> = {}) {
 
 export async function fetchJobs(params: Record<string, any> = {}) {
   const qs = buildQuery(params);
-  const url = `${DJANGO_API_BASE}/jobs/${qs ? `?${qs}` : ""}`;
+  const url = `${getApiBase()}/jobs/${qs ? `?${qs}` : ""}`;
 
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch jobs: ${res.status}`);
@@ -24,7 +29,7 @@ export async function fetchJobs(params: Record<string, any> = {}) {
 export async function fetchJob(id: number | string) {
   console.log("fetchJob received id:", id);
   const cleanId = encodeURIComponent(String(id).trim());
-  const url = `${DJANGO_API_BASE}/jobs/${cleanId}/`;
+  const url = `${getApiBase()}/jobs/${cleanId}/`;
   console.log("fetchJob url:", url);
 
   const res = await fetch(url, { cache: "no-store" });
