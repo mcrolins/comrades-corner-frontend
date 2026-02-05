@@ -1,4 +1,7 @@
-export const DJANGO_API_BASE = "http://127.0.0.1:8000";
+export const DJANGO_API_BASE = process.env.DJANGO_API_BASE;
+if (!DJANGO_API_BASE) {
+  throw new Error("DJANGO_API_BASE is not set");
+}
 
 export function buildQuery(params: Record<string, any> = {}) {
   const qp = new URLSearchParams();
