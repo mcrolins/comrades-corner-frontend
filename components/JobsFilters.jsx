@@ -47,23 +47,13 @@ export default function JobsFilters({ initial }) {
     setTypingTimer(t);
   }
 
-  const controlStyle = {
-    padding: 10,
-    border: "1px solid #ddd",
-    borderRadius: 10,
-    background: "var(--background)",
-    color: "var(--foreground)",
-    fontSize: 14,
-    lineHeight: 1.2,
-  };
-
   return (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+    <div className="flex flex-wrap items-center gap-3 rounded-[1.75rem] border border-zinc-200 bg-white/80 p-3 shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
       <input
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Search title, company, location..."
-        style={{ ...controlStyle, minWidth: 280 }}
+        className="min-w-[260px] flex-1 rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-orange-300 focus:ring-4 focus:ring-orange-100"
       />
 
       <select
@@ -72,7 +62,7 @@ export default function JobsFilters({ initial }) {
           setLevel(e.target.value);
           push({ level: e.target.value });
         }}
-        style={controlStyle}
+        className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-orange-300 focus:ring-4 focus:ring-orange-100"
       >
         <option value="">All levels</option>
         <option value="intern">Internship</option>
@@ -87,7 +77,7 @@ export default function JobsFilters({ initial }) {
           setJobType(e.target.value);
           push({ job_type: e.target.value });
         }}
-        style={controlStyle}
+        className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-orange-300 focus:ring-4 focus:ring-orange-100"
       >
         <option value="">All types</option>
         <option value="full_time">Full-time</option>
@@ -96,9 +86,11 @@ export default function JobsFilters({ initial }) {
         <option value="internship">Internship</option>
       </select>
 
-      <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
+      <label className="flex items-center gap-3 rounded-2xl bg-zinc-50 px-4 py-3 text-sm font-medium text-zinc-700">
         <input
           type="checkbox"
+          className="h-4 w-4 rounded"
+          style={{ accentColor: "#f97316" }}
           checked={remote}
           onChange={(e) => {
             setRemote(e.target.checked);
@@ -114,7 +106,7 @@ export default function JobsFilters({ initial }) {
           setOrdering(e.target.value);
           push({ ordering: e.target.value });
         }}
-        style={controlStyle}
+        className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-orange-300 focus:ring-4 focus:ring-orange-100"
       >
         <option value="-created_at">Newest</option>
         <option value="created_at">Oldest</option>
@@ -131,7 +123,7 @@ export default function JobsFilters({ initial }) {
           setOrdering("-created_at");
           router.push("/jobs?ordering=-created_at");
         }}
-        style={{ ...controlStyle, padding: "10px 12px", cursor: "pointer" }}
+        className="cursor-pointer rounded-2xl bg-zinc-100 px-4 py-3 text-sm font-semibold text-zinc-800 transition hover:bg-zinc-200"
       >
         Clear
       </button>

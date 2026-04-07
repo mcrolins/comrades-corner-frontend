@@ -19,32 +19,55 @@ export default async function JobsPage({ searchParams }) {
   const jobs = await fetchJobs(params);
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 16 }}>
-      <div
-        style={{
-          padding: "14px 16px",
-          
-          borderRadius: 12,
-          background: "var(--background)",
-          marginBottom: 10,
-          fontWeight: 700,
-        }}
-      >
-      
-      <h1 style={{ fontSize: 28, fontWeight: 800 }}> Comrades Corner Entry-level Jobs</h1>
-       Number 1 source for entry-level tech jobs.</div>
-      <div style={{ marginTop: 12 }}>
-        <JobsFilters initial={params} />
-      </div>
+    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+      <section className="overflow-hidden rounded-[2.25rem] border border-black/10 bg-white/80 px-6 py-7 shadow-[0_24px_80px_rgba(15,23,42,0.06)] backdrop-blur">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.28em] text-orange-600">
+              Job board
+            </p>
+            <h1 className="mt-3 text-4xl font-black tracking-tight text-zinc-950 sm:text-5xl">
+              Comrades Corner entry-level jobs
+            </h1>
+            <p className="mt-4 text-base leading-7 text-zinc-700 sm:text-lg">
+              Browse recent openings for interns, graduates, juniors, and early-career talent with
+              filters that keep the search focused.
+            </p>
+          </div>
 
-      <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
+          <div className="grid gap-3 rounded-[1.75rem] border border-zinc-200 bg-white/75 p-4 sm:grid-cols-3 lg:min-w-[360px]">
+            {[
+              { label: "Sorted by", value: "Newest first" },
+              { label: "Best for", value: "Junior talent" },
+              { label: "Work modes", value: "Remote + hybrid" },
+            ].map((item) => (
+              <div key={item.label} className="rounded-2xl bg-zinc-50 px-3 py-2">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-zinc-500">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-sm font-semibold text-zinc-900">{item.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <JobsFilters initial={params} />
+      </section>
+
+      <section className="grid gap-4">
         {jobs.length === 0 ? (
-          <p style={{ opacity: 0.7 }}>No jobs match your filters.</p>
+          <div className="rounded-[1.75rem] border border-zinc-200 bg-white/80 p-8 text-center shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
+            <p className="text-lg font-semibold text-zinc-900">No jobs match your filters.</p>
+            <p className="mt-2 text-sm text-zinc-600">
+              Try broadening the search terms or clearing one of the filters.
+            </p>
+          </div>
         ) : (
           jobs.map((job) => <JobCard key={job.id} job={job} />)
         )}
-      </div>
-      </div>
-    
+      </section>
+    </main>
   );
 }
