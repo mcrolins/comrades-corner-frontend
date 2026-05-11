@@ -3,9 +3,8 @@ import JobCard from "@/components/JobCard";
 import { fetchJobs } from "@/lib/jobsApi";
 
 export default async function JobsPage({ searchParams }) {
-  const sp = await searchParams; // ✅ unwrap Promise in Next.js 16
+  const sp = await searchParams;
 
-  // These come from the URL: /jobs?search=...&level=... etc.
   const params = {
     search: sp?.search ?? "",
     level: sp?.level ?? "",
@@ -15,57 +14,78 @@ export default async function JobsPage({ searchParams }) {
     ordering: sp?.ordering ?? "-created_at",
   };
 
-  // Server-side search/filtering because we send params to Django
   const jobs = await fetchJobs(params);
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
-      <section className="overflow-hidden rounded-[2.25rem] border border-black/10 bg-white/80 px-6 py-7 shadow-[0_24px_80px_rgba(15,23,42,0.06)] backdrop-blur">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-4 py-12 sm:px-6 lg:px-8">
+      {/* Header Section */}
+      <section className="relative overflow-hidden rounded-[2.5rem] border border-black/5 bg-white p-8 shadow-2xl shadow-orange-500/5 dark:border-white/5 dark:bg-zinc-900/50 dark:shadow-none sm:p-12">
+        <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-orange-500/10 blur-3xl dark:bg-orange-500/5" />
+        
+        <div className="relative flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-orange-600">
-              Job board
-            </p>
-            <h1 className="mt-3 text-4xl font-black tracking-tight text-zinc-950 sm:text-5xl">
-              Comrades Corner entry-level jobs
+            <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-orange-600 dark:text-orange-400">
+              Job Board
+            </div>
+            <h1 className="mt-6 text-4xl font-black tracking-tight text-zinc-950 dark:text-white sm:text-5xl lg:text-6xl text-balance">
+              Find your next career move at Comrades Corner.
             </h1>
-            <p className="mt-4 text-base leading-7 text-zinc-700 sm:text-lg">
-              Browse recent openings for interns, graduates, juniors, and early-career talent with
-              filters that keep the search focused.
+            <p className="mt-6 text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-2xl">
+              We curate the best entry-level opportunities for graduates and interns. 
+              Use the filters below to find roles that match your skills.
             </p>
           </div>
 
-          <div className="grid gap-3 rounded-[1.75rem] border border-zinc-200 bg-white/75 p-4 sm:grid-cols-3 lg:min-w-[360px]">
+          <div className="grid shrink-0 gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:min-w-[240px]">
             {[
-              { label: "Sorted by", value: "Newest first" },
-              { label: "Best for", value: "Junior talent" },
-              { label: "Work modes", value: "Remote + hybrid" },
+              { label: "Active Roles", value: jobs.length + "+" },
+              { label: "Target", value: "Early Career" },
+              { label: "Updated", value: "Live Now" },
             ].map((item) => (
-              <div key={item.label} className="rounded-2xl bg-zinc-50 px-3 py-2">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-zinc-500">
+              <div key={item.label} className="rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800/50 dark:border dark:border-white/5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-500">
                   {item.label}
                 </p>
-                <p className="mt-2 text-sm font-semibold text-zinc-900">{item.value}</p>
+                <p className="mt-1 text-base font-black text-zinc-900 dark:text-white">{item.value}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="space-y-4">
-        <JobsFilters initial={params} />
+      {/* Filters Section */}
+      <section className="sticky top-4 z-20">
+        <div className="rounded-[2rem] border border-black/5 bg-white/70 p-4 shadow-xl shadow-black/5 backdrop-blur-xl dark:border-white/5 dark:bg-zinc-900/80">
+          <JobsFilters initial={params} />
+        </div>
       </section>
 
-      <section className="grid gap-4">
+      {/* Jobs List Section */}
+      <section className="grid gap-6">
         {jobs.length === 0 ? (
-          <div className="rounded-[1.75rem] border border-zinc-200 bg-white/80 p-8 text-center shadow-[0_16px_40px_rgba(15,23,42,0.05)]">
-            <p className="text-lg font-semibold text-zinc-900">No jobs match your filters.</p>
-            <p className="mt-2 text-sm text-zinc-600">
-              Try broadening the search terms or clearing one of the filters.
+          <div className="rounded-[2rem] border border-zinc-200 bg-white p-12 text-center shadow-sm dark:border-white/5 dark:bg-zinc-900/40">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+              <svg className="h-8 w-8 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 className="mt-6 text-xl font-black text-zinc-950 dark:text-white">No results found</h3>
+            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+              Try adjusting your filters or search terms to find what you&apos;re looking for.
             </p>
+            <button 
+              onClick={() => window.location.href = '/jobs'}
+              className="mt-6 inline-flex items-center font-bold text-orange-500 hover:text-orange-600"
+            >
+              Clear all filters
+            </button>
           </div>
         ) : (
-          jobs.map((job) => <JobCard key={job.id} job={job} />)
+          <div className="grid gap-4">
+            {jobs.map((job) => (
+              <JobCard key={job.id} job={job} />
+            ))}
+          </div>
         )}
       </section>
     </main>

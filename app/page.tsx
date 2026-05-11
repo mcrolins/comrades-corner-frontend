@@ -30,6 +30,7 @@ const categories = [
   { name: "IT & Support", meta: "Cloud, help desk, systems, security" },
   { name: "Marketing & Growth", meta: "Content, SEO, lifecycle, social" },
   { name: "Operations", meta: "People ops, finance, customer success" },
+  { name: "Industrial Attachment", meta: "Internships, practicums, on-the-job training" },
 ];
 
 const candidateBenefits = [
@@ -43,74 +44,67 @@ export default async function Home() {
   const featuredJobs = await getFeaturedJobs();
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(244,114,36,0.16),_transparent_28%),radial-gradient(circle_at_top_right,_rgba(14,165,233,0.16),_transparent_30%),linear-gradient(180deg,#fffdf8_0%,#ffffff_36%,#f7f7f2_100%)] text-zinc-950">
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 py-8 sm:px-8 lg:px-10">
-        <nav className="flex flex-col gap-4 rounded-full border border-black/10 bg-white/80 px-5 py-4 shadow-[0_10px_40px_rgba(15,23,42,0.06)] backdrop-blur md:flex-row md:items-center md:justify-between">
-          <Link href="/" className="text-lg font-black tracking-tight text-zinc-950">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(244,114,36,0.12),_transparent_28%),radial-gradient(circle_at_top_right,_rgba(14,165,233,0.12),_transparent_30%)] dark:bg-zinc-950">
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-20 px-6 py-12 sm:px-8 lg:px-10">
+        
+        {/* Navigation */}
+        <nav className="sticky top-6 z-50 flex flex-col gap-4 rounded-2xl md:rounded-full border border-black/5 bg-white/70 px-6 py-4 shadow-xl shadow-black/5 backdrop-blur-xl md:flex-row md:items-center md:justify-between dark:border-white/5 dark:bg-zinc-900/80">
+          <Link href="/" className="text-xl font-black tracking-tight text-zinc-950 dark:text-white">
             Comrades Corner
           </Link>
-          <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-zinc-700">
-            <a href="#features" className="transition hover:text-zinc-950">
-              Features
-            </a>
-            <a href="#categories" className="transition hover:text-zinc-950">
-              Categories
-            </a>
-            <a href="#featured-jobs" className="transition hover:text-zinc-950">
-              Live jobs
-            </a>
+          <div className="flex flex-wrap items-center gap-6 text-sm font-bold text-zinc-600 dark:text-zinc-400">
+            <a href="#features" className="transition hover:text-orange-500 dark:hover:text-orange-400">Features</a>
+            <a href="#categories" className="transition hover:text-orange-500 dark:hover:text-orange-400">Categories</a>
+            <a href="#featured-jobs" className="transition hover:text-orange-500 dark:hover:text-orange-400">Live Jobs</a>
             <Link
               href="/jobs?ordering=-created_at"
-              className="rounded-full bg-zinc-950 px-4 py-2 text-white transition hover:bg-orange-500"
+              className="rounded-full bg-zinc-950 px-6 py-2.5 text-white transition hover:bg-orange-500 dark:bg-white dark:text-zinc-950 dark:hover:bg-orange-500 dark:hover:text-white"
             >
-              Browse jobs
+              Browse Jobs
             </Link>
           </div>
         </nav>
 
-        <section className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-700">
-              Early-career jobs for people who want signal, not noise
+        {/* Hero Section */}
+        <section className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div className="space-y-10">
+            <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 px-5 py-2 text-sm font-black uppercase tracking-widest text-orange-600 dark:text-orange-400">
+              Future-Proof Your Career
             </div>
 
-            <div className="space-y-5">
-              <h1 className="max-w-4xl text-5xl font-black tracking-tight text-balance text-zinc-950 sm:text-6xl lg:text-7xl">
-                A modern entry-level job board for graduates, interns, and junior talent.
+            <div className="space-y-6">
+              <h1 className="max-w-4xl text-5xl font-black tracking-tight text-zinc-950 dark:text-white sm:text-6xl lg:text-8xl text-balance leading-[1.1]">
+                Modern job board for the next generation.
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-zinc-700 sm:text-xl">
-                Discover newly posted roles, narrow them down fast, and jump directly into
-                application flows that do not waste your time.
+              <p className="max-w-2xl text-xl leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-2xl">
+                Discover curated roles for graduates, interns, and junior talent. Narrow them down fast and apply in seconds.
               </p>
             </div>
 
-            <div className="grid gap-4 rounded-[2rem] border border-black/10 bg-white p-4 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:grid-cols-[1.2fr_0.9fr_0.8fr_auto]">
-              <div className="rounded-[1.5rem] bg-zinc-100 px-4 py-3">
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-zinc-500">Keyword</p>
-                <p className="mt-2 text-base font-semibold text-zinc-900">Frontend, support, data analyst</p>
+            <div className="grid gap-4 rounded-[2.5rem] border border-black/5 bg-white p-5 shadow-2xl shadow-black/5 dark:border-white/5 dark:bg-zinc-900/50 sm:grid-cols-[1.2fr_0.9fr_0.8fr_auto]">
+              <div className="rounded-2xl bg-zinc-50 px-5 py-4 dark:bg-zinc-800/50">
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Keyword</p>
+                <p className="mt-1 text-base font-bold text-zinc-900 dark:text-white">Engineering, Data...</p>
               </div>
-              <div className="rounded-[1.5rem] bg-zinc-100 px-4 py-3">
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-zinc-500">Level</p>
-                <p className="mt-2 text-base font-semibold text-zinc-900">Entry / Graduate</p>
+              <div className="rounded-2xl bg-zinc-50 px-5 py-4 dark:bg-zinc-800/50">
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Level</p>
+                <p className="mt-1 text-base font-bold text-zinc-900 dark:text-white">Entry / Junior</p>
               </div>
-              <div className="rounded-[1.5rem] bg-zinc-100 px-4 py-3">
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-zinc-500">Mode</p>
-                <p className="mt-2 text-base font-semibold text-zinc-900">Remote or hybrid</p>
+              <div className="rounded-2xl bg-zinc-50 px-5 py-4 dark:bg-zinc-800/50">
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Mode</p>
+                <p className="mt-1 text-base font-bold text-zinc-900 dark:text-white">Remote First</p>
               </div>
               <Link
                 href="/jobs?ordering=-created_at"
-                className="flex items-center justify-center rounded-[1.5rem] bg-orange-500 px-6 py-3 text-base font-bold text-white transition hover:bg-orange-600"
+                className="flex items-center justify-center rounded-2xl bg-orange-500 px-8 py-4 text-base font-black text-white transition hover:bg-orange-600 hover:scale-[1.02] active:scale-95 shadow-xl shadow-orange-500/20"
               >
-                Start searching
+                Search
               </Link>
             </div>
 
-            <div className="flex flex-wrap gap-3 text-sm font-medium text-zinc-600">
+            <div className="flex flex-wrap gap-3 text-xs font-black uppercase tracking-widest text-zinc-500">
               {candidateBenefits.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-zinc-200 bg-white/80 px-4 py-2 shadow-sm"
-                >
+                <span key={item} className="rounded-full border border-zinc-200 bg-white px-4 py-2 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-400">
                   {item}
                 </span>
               ))}
@@ -118,184 +112,151 @@ export default async function Home() {
           </div>
 
           <div className="relative">
-            <div className="absolute -left-6 top-10 hidden h-32 w-32 rounded-full bg-sky-200/50 blur-3xl md:block" />
-            <div className="absolute -right-6 bottom-10 hidden h-36 w-36 rounded-full bg-orange-200/60 blur-3xl md:block" />
+            <div className="absolute -left-10 top-10 h-64 w-64 rounded-full bg-sky-500/10 blur-[100px] dark:bg-sky-500/5" />
+            <div className="absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-orange-500/10 blur-[100px] dark:bg-orange-500/5" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-zinc-200 bg-zinc-950 p-6 text-white shadow-[0_30px_120px_rgba(15,23,42,0.2)]">
+            <div className="relative overflow-hidden rounded-[3rem] border border-zinc-200 bg-zinc-950 p-8 text-white shadow-2xl dark:border-white/10">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.28em] text-zinc-400">
-                    Candidate Pulse
-                  </p>
-                  <h2 className="mt-2 text-2xl font-black">Today&apos;s momentum</h2>
-                </div>
-                <div className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-bold text-emerald-300">
-                  Updated live
-                </div>
+                <h2 className="text-2xl font-black italic tracking-tighter">MOMENTUM</h2>
+                <div className="rounded-full bg-emerald-500/20 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-emerald-400">Live</div>
               </div>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              <div className="mt-12 grid gap-6 sm:grid-cols-3 lg:grid-cols-1">
                 {quickStats.map((item) => (
-                  <div key={item.label} className="rounded-[1.5rem] bg-white/6 p-5 ring-1 ring-white/10">
-                    <p className="text-3xl font-black text-white">{item.value}</p>
-                    <p className="mt-2 text-sm leading-6 text-zinc-300">{item.label}</p>
+                  <div key={item.label}>
+                    <p className="text-4xl font-black text-white">{item.value}</p>
+                    <p className="mt-2 text-sm font-bold text-zinc-500 uppercase tracking-widest">{item.label}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 rounded-[1.5rem] bg-gradient-to-r from-orange-500 to-amber-400 p-5 text-zinc-950">
-                <p className="text-xs font-black uppercase tracking-[0.24em]">What candidates want</p>
-                <p className="mt-3 text-lg font-semibold leading-7">
-                  Fewer irrelevant postings, faster filtering, and job cards that help you decide
-                  whether to click.
+              <div className="mt-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-400 p-6 text-zinc-950">
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-70">User Feedback</p>
+                <p className="mt-3 text-lg font-bold leading-tight">
+                  &quot;The fastest way to find internships that don&apos;t feel like dead ends.&quot;
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="features"
-          className="grid gap-6 rounded-[2.25rem] border border-black/10 bg-white/85 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.06)] lg:grid-cols-[0.9fr_1.1fr]"
-        >
-          <div className="space-y-4">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-600">Why this works</p>
-            <h2 className="text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">
-              Landing-page sections that behave like a real job product, not a brochure.
+        {/* Features Section */}
+        <section id="features" className="grid gap-8 lg:grid-cols-3">
+          <div className="lg:col-span-1 space-y-6">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-orange-600">Our Philosophy</p>
+            <h2 className="text-4xl font-black tracking-tight text-zinc-950 dark:text-white sm:text-5xl">
+              Built for signal, not noise.
             </h2>
-            <p className="max-w-xl text-base leading-7 text-zinc-700">
-              The homepage introduces the value proposition, exposes the main search path, and
-              previews live inventory so users understand the board before they commit to browsing.
+            <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+              We focus on the candidate experience first. No spam, no ghosting, just high-quality roles.
             </p>
           </div>
 
-          <div className="grid gap-4">
+          <div className="lg:col-span-2 grid gap-6 sm:grid-cols-2">
             {featurePillars.map((feature) => (
-              <article
-                key={feature.title}
-                className="rounded-[1.75rem] border border-zinc-200 bg-zinc-50 p-5 transition hover:-translate-y-0.5 hover:bg-white"
-              >
-                <h3 className="text-xl font-black tracking-tight text-zinc-950">{feature.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-zinc-700">{feature.body}</p>
+              <article key={feature.title} className="rounded-[2.5rem] border border-black/5 bg-white p-8 shadow-sm transition hover:border-orange-500/20 dark:border-white/5 dark:bg-zinc-900/40">
+                <h3 className="text-xl font-black tracking-tight text-zinc-950 dark:text-white">{feature.title}</h3>
+                <p className="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium">{feature.body}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="categories" className="space-y-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.3em] text-sky-700">Browse by track</p>
-              <h2 className="mt-2 text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">
-                Categories candidates actually understand at a glance.
+        {/* Categories Section */}
+        <section id="categories" className="space-y-10">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-4">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-600">Exploration</p>
+              <h2 className="text-4xl font-black tracking-tight text-zinc-950 dark:text-white sm:text-5xl">
+                Browse by career track.
               </h2>
             </div>
-            <Link
-              href="/jobs?ordering=-created_at"
-              className="text-sm font-bold text-zinc-700 underline decoration-orange-400 underline-offset-4 transition hover:text-zinc-950"
-            >
-              View all open roles
+            <Link href="/jobs" className="text-sm font-black text-orange-600 underline decoration-2 underline-offset-8 transition hover:text-orange-700">
+              View All Tracks
             </Link>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {categories.map((category, index) => (
               <Link
                 key={category.name}
-                href={`/jobs?ordering=-created_at`}
-                className="group rounded-[1.75rem] border border-zinc-200 bg-white p-5 shadow-[0_16px_40px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-zinc-950"
+                href="/jobs"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-black/5 bg-white p-8 transition-all hover:-translate-y-1 hover:border-orange-500/30 dark:border-white/5 dark:bg-zinc-900/40"
               >
-                <p className="text-sm font-black uppercase tracking-[0.26em] text-zinc-400">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-5 text-2xl font-black tracking-tight text-zinc-950">{category.name}</h3>
-                <p className="mt-3 text-sm leading-7 text-zinc-700">{category.meta}</p>
-                <span className="mt-6 inline-flex text-sm font-bold text-orange-600 transition group-hover:translate-x-1">
-                  Explore roles
-                </span>
+                <div>
+                  <span className="text-4xl font-black text-zinc-100 dark:text-white/5 transition-colors group-hover:text-orange-500/10">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-6 text-2xl font-black tracking-tight text-zinc-950 dark:text-white group-hover:text-orange-500 transition-colors">
+                    {category.name}
+                  </h3>
+                  <p className="mt-3 text-sm font-medium text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    {category.meta}
+                  </p>
+                </div>
+                <div className="mt-8 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-orange-600 transition-all group-hover:translate-x-2">
+                  Explore <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </div>
               </Link>
             ))}
           </div>
         </section>
 
-        <section
-          id="featured-jobs"
-          className="rounded-[2.25rem] border border-black/10 bg-zinc-950 px-6 py-7 text-white shadow-[0_30px_120px_rgba(15,23,42,0.18)]"
-        >
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-300">Live preview</p>
-              <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
-                Featured roles from the current jobs feed.
-              </h2>
+        {/* Featured Jobs Section */}
+        <section id="featured-jobs" className="rounded-[3rem] border border-black/5 bg-zinc-950 p-10 text-white shadow-2xl dark:border-white/10 dark:bg-zinc-900/60 sm:p-16">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-4">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-orange-400">Live Inventory</p>
+              <h2 className="text-4xl font-black tracking-tight sm:text-5xl">Featured Openings</h2>
             </div>
-            <Link
-              href="/jobs?ordering=-created_at"
-              className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white hover:text-zinc-950"
-            >
-              Open full listings
+            <Link href="/jobs" className="rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-black transition hover:bg-white hover:text-zinc-950">
+              Open Full List
             </Link>
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          <div className="mt-16 grid gap-6 lg:grid-cols-2">
             {featuredJobs.length ? (
-              featuredJobs.map((job: { id: string | number }) => <JobCard key={job.id} job={job} />)
+              featuredJobs.map((job) => <JobCard key={job.id} job={job} />)
             ) : (
-              <div className="rounded-[1.75rem] border border-dashed border-white/20 bg-white/5 p-8 text-sm leading-7 text-zinc-300 lg:col-span-3">
-                Live jobs could not be loaded for the homepage preview. The main jobs page still
-                remains the primary search destination once `DJANGO_API_BASE` is available.
+              <div className="rounded-3xl border border-dashed border-white/20 p-12 text-center text-zinc-500 lg:col-span-2">
+                Loading live opportunities...
               </div>
             )}
           </div>
         </section>
 
-        <section className="grid gap-6 pb-8 lg:grid-cols-[1fr_0.8fr]">
-          <div className="rounded-[2.25rem] border border-black/10 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.06)]">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-600">Trust markers</p>
-            <h2 className="mt-3 text-3xl font-black tracking-tight text-zinc-950">
-              What a modern job-board homepage needs
+        {/* Final CTA */}
+        <section className="rounded-[3rem] bg-orange-500 p-12 text-white shadow-2xl shadow-orange-500/30 sm:p-20">
+          <div className="mx-auto max-w-4xl text-center space-y-10">
+            <h2 className="text-5xl font-black tracking-tight sm:text-7xl leading-[1.1]">
+              Ready to find your first role?
             </h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {[
-                "Strong hero headline and clear CTA",
-                "Search-first routing into real inventory",
-                "Feature explanation with product language",
-                "Category navigation that reduces bounce",
-                "Live role preview for credibility",
-                "Closing section that drives repeat browsing",
-              ].map((item) => (
-                <div key={item} className="rounded-[1.5rem] bg-zinc-100 px-4 py-4 text-sm font-semibold text-zinc-800">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[2.25rem] bg-orange-500 p-6 text-white shadow-[0_24px_80px_rgba(249,115,22,0.28)]">
-            <p className="text-sm font-black uppercase tracking-[0.3em] text-orange-100">Ready to browse</p>
-            <h2 className="mt-3 text-3xl font-black tracking-tight">
-              Start with the newest listings and refine from there.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-orange-50">
-              The homepage now pushes candidates toward `/jobs` with the newest entries already
-              prioritized.
+            <p className="text-xl font-bold text-white/90 sm:text-2xl">
+              Stop scrolling, start applying. The newest listings are waiting for you.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/jobs?ordering=-created_at"
-                className="rounded-full bg-white px-5 py-3 text-sm font-black text-orange-600 transition hover:bg-zinc-950 hover:text-white"
-              >
-                Browse newest jobs
+            <div className="flex flex-wrap justify-center gap-6">
+              <Link href="/jobs" className="rounded-2xl bg-white px-10 py-5 text-lg font-black text-orange-600 transition hover:bg-zinc-950 hover:text-white hover:scale-105 active:scale-95 shadow-xl">
+                Browse Newest Jobs
               </Link>
-              <Link
-                href="/jobs?is_remote=true&ordering=-created_at"
-                className="rounded-full border border-white/35 px-5 py-3 text-sm font-black text-white transition hover:bg-white hover:text-orange-600"
-              >
-                Remote only
+              <Link href="/jobs?is_remote=true" className="rounded-2xl border-2 border-white/30 px-10 py-5 text-lg font-black transition hover:bg-white/10">
+                Remote Only
               </Link>
             </div>
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="flex flex-col items-center justify-between gap-6 border-t border-black/5 py-12 dark:border-white/5 md:flex-row">
+          <p className="text-sm font-bold text-zinc-500 dark:text-zinc-500">
+            © 2026 Comrades Corner. All rights reserved.
+          </p>
+          <div className="flex gap-8 text-sm font-black uppercase tracking-widest text-zinc-400">
+            <a href="#" className="hover:text-orange-500">Twitter</a>
+            <a href="#" className="hover:text-orange-500">LinkedIn</a>
+            <a href="#" className="hover:text-orange-500">GitHub</a>
+          </div>
+        </footer>
+
       </section>
     </main>
   );
@@ -304,7 +265,7 @@ export default async function Home() {
 async function getFeaturedJobs() {
   try {
     const jobs = await fetchJobs({ ordering: "-created_at" });
-    return Array.isArray(jobs) ? jobs.slice(0, 3) : [];
+    return Array.isArray(jobs) ? jobs.slice(0, 4) : [];
   } catch {
     return [];
   }
