@@ -1,3 +1,4 @@
+import Link from "next/link";
 import JobsFilters from "@/components/JobsFilters";
 import JobCard from "@/components/JobCard";
 import { fetchJobs } from "@/lib/jobsApi";
@@ -73,12 +74,12 @@ export default async function JobsPage({ searchParams }) {
             <p className="mt-2 text-zinc-600 dark:text-zinc-400">
               Try adjusting your filters or search terms to find what you&apos;re looking for.
             </p>
-            <button 
-              onClick={() => window.location.href = '/jobs'}
-              className="mt-6 inline-flex items-center font-bold text-orange-500 hover:text-orange-600"
+            <Link 
+              href="/jobs"
+              className="mt-6 inline-flex items-center font-bold text-orange-500 hover:text-orange-700"
             >
               Clear all filters
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="grid gap-4">
