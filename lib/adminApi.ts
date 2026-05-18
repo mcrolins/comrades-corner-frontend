@@ -14,7 +14,7 @@ async function apiFetch(path: string, options: RequestInit = {}) {
 }
 
 export async function adminLogin(username: string, password: string) {
-  const res = await apiFetch("/api/admin/login/", {
+  const res = await apiFetch("/api/admin/login", {
     method: "POST",
     body: JSON.stringify({ username, password }),
   });
@@ -26,23 +26,23 @@ export async function adminLogin(username: string, password: string) {
 }
 
 export async function adminLogout() {
-  await apiFetch("/api/admin/logout/", { method: "POST" });
+  await apiFetch("/api/admin/logout", { method: "POST" });
 }
 
 export async function adminCheck() {
-  const res = await apiFetch("/api/admin/check/");
+  const res = await apiFetch("/api/admin/check");
   if (!res.ok) return null;
   return res.json();
 }
 
 export async function fetchAdminJobs() {
-  const res = await apiFetch("/api/admin/jobs/");
+  const res = await apiFetch("/api/admin/jobs");
   if (!res.ok) throw new Error("Failed to fetch jobs");
   return res.json();
 }
 
 export async function createJob(data: Record<string, unknown>) {
-  const res = await apiFetch("/api/admin/jobs/create/", {
+  const res = await apiFetch("/api/admin/jobs/create", {
     method: "POST",
     body: JSON.stringify(data),
   });
@@ -54,14 +54,14 @@ export async function createJob(data: Record<string, unknown>) {
 }
 
 export async function deleteJob(id: number) {
-  const res = await apiFetch(`/api/admin/jobs/${id}/delete/`, {
+  const res = await apiFetch(`/api/admin/jobs/${id}/delete`, {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("Failed to delete job");
 }
 
 export async function updateJob(id: number, data: Record<string, unknown>) {
-  const res = await apiFetch(`/api/admin/jobs/${id}/update/`, {
+  const res = await apiFetch(`/api/admin/jobs/${id}/update`, {
     method: "PATCH",
     body: JSON.stringify(data),
   });
@@ -70,7 +70,7 @@ export async function updateJob(id: number, data: Record<string, unknown>) {
 }
 
 export async function fetchAnalytics() {
-  const res = await apiFetch("/api/admin/analytics/");
+  const res = await apiFetch("/api/admin/analytics");
   if (!res.ok) throw new Error("Failed to fetch analytics");
   return res.json();
 }
