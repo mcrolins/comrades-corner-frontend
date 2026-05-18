@@ -2,14 +2,14 @@
    ADMIN DASHBOARD – PREMIUM DARK THEME
    ═══════════════════════════════════════════════ */
 
-/* ── Variables ──────────────────────────────── */
+/* ── Variables (Premium Light Theme Default) ──────────────────────────────── */
 :root {
-  --dash-bg: #050507;
-  --dash-surface: #0e0e12;
-  --dash-surface-2: #16161c;
-  --dash-border: #1e1e26;
-  --dash-text: #e4e4ec;
-  --dash-text-muted: #71717a;
+  --dash-bg: #e2e8f0; /* Deep slate background for strong contrast */
+  --dash-surface: #f8fafc; /* Very soft off-white (not pure white) for cards */
+  --dash-surface-2: #cbd5e1; /* Hover states */
+  --dash-border: #94a3b8; /* Distinct borders */
+  --dash-text: #0f172a;
+  --dash-text-muted: #475569;
   --dash-accent: #f97316;
   --dash-accent-2: #0ea5e9;
   --dash-accent-3: #8b5cf6;
@@ -18,6 +18,28 @@
   --dash-radius: 16px;
   --dash-radius-sm: 10px;
   --sidebar-w: 260px;
+  --dash-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  --dash-shadow-lg: 0 30px 80px rgba(15, 23, 42, 0.12);
+  --dash-glow-opacity: 0.15;
+  --dash-login-bg: rgba(255, 255, 255, 0.85);
+  --dash-login-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Premium Dark Theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dash-bg: #050507;
+    --dash-surface: #0e0e12;
+    --dash-surface-2: #16161c;
+    --dash-border: #1e1e26;
+    --dash-text: #e4e4ec;
+    --dash-text-muted: #71717a;
+    --dash-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --dash-shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.6);
+    --dash-glow-opacity: 0.4;
+    --dash-login-bg: rgba(14, 14, 18, 0.85);
+    --dash-login-border: rgba(255, 255, 255, 0.06);
+  }
 }
 
 /* ── Login Page ─────────────────────────────── */
@@ -35,7 +57,7 @@
   border-radius: 50%;
   filter: blur(120px);
   pointer-events: none;
-  opacity: 0.4;
+  opacity: var(--dash-glow-opacity);
 }
 .login-glow-1 {
   width: 500px; height: 500px;
@@ -53,15 +75,15 @@
   max-width: 400px;
   margin: 20px;
   padding: 48px 36px;
-  background: rgba(14, 14, 18, 0.85);
+  background: var(--dash-login-bg);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid var(--dash-login-border);
   border-radius: 28px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  box-shadow: var(--dash-shadow-lg);
 }
 .login-logo {
   width: 64px; height: 64px;
@@ -77,7 +99,7 @@
   text-align: center;
   font-size: 1.75rem;
   font-weight: 900;
-  color: white;
+  color: var(--dash-text);
   letter-spacing: -0.03em;
 }
 .login-subtitle {
@@ -187,7 +209,7 @@
   gap: 10px;
   font-size: 1.05rem;
   font-weight: 900;
-  color: white;
+  color: var(--dash-text);
   letter-spacing: -0.02em;
 }
 .dash-brand svg { color: var(--dash-accent); }
@@ -240,7 +262,7 @@
   font-weight: 900;
   font-size: 0.85rem;
 }
-.dash-user-name { font-weight: 800; font-size: 0.85rem; color: white; }
+.dash-user-name { font-weight: 800; font-size: 0.85rem; color: var(--dash-text); }
 .dash-user-role { font-size: 0.7rem; color: var(--dash-text-muted); font-weight: 600; }
 .dash-logout-btn {
   width: 100%;
@@ -277,7 +299,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(5,5,7,0.8);
+  background: var(--dash-login-bg);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -297,7 +319,7 @@
 .dash-page-title {
   font-size: 1.3rem;
   font-weight: 900;
-  color: white;
+  color: var(--dash-text);
   letter-spacing: -0.02em;
 }
 .dash-content {
@@ -348,7 +370,7 @@
 }
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  box-shadow: var(--dash-shadow);
 }
 .stat-label {
   font-size: 0.7rem;
@@ -486,7 +508,7 @@
   background: var(--dash-surface-2);
   border: 1px solid var(--dash-border);
 }
-.demand-job-title { font-weight: 800; font-size: 0.85rem; color: white; }
+.demand-job-title { font-weight: 800; font-size: 0.85rem; color: var(--dash-text); }
 .demand-job-company { font-size: 0.75rem; color: var(--dash-text-muted); font-weight: 600; }
 .demand-views {
   font-size: 0.75rem;
@@ -610,7 +632,7 @@
 .form-title {
   font-size: 1.1rem;
   font-weight: 900;
-  color: white;
+  color: var(--dash-text);
   margin-bottom: 20px;
 }
 .form-grid {
@@ -709,7 +731,7 @@
   transition: background 0.12s;
 }
 .listings-table tbody tr:hover { background: var(--dash-surface-2); }
-.listing-title { font-weight: 800; color: white; }
+.listing-title { font-weight: 800; color: var(--dash-text); }
 .listing-badge {
   display: inline-block;
   padding: 3px 10px;
