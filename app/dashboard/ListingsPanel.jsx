@@ -32,8 +32,11 @@ export default function ListingsPanel() {
   const [deleting, setDeleting] = useState(null);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
   useEffect(() => { loadJobs(); }, []);
+  useEffect(() => { setPage(1); }, [search]);
 
   async function loadJobs() {
     setLoading(true);
@@ -79,6 +82,9 @@ export default function ListingsPanel() {
     const q = search.toLowerCase();
     return j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q);
   });
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginatedJobs = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
   if (loading) return <div className="panel-loading">Loading listings…</div>;
 
@@ -182,7 +188,7 @@ export default function ListingsPanel() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((job) => (
+            {paginatedJobs.map((job) => (
               <tr key={job.id}>
                 <td className="listing-title">{job.title}</td>
                 <td>{job.company}</td>
@@ -201,14 +207,24 @@ export default function ListingsPanel() {
                 </td>
               </tr>
             ))}
-            {filtered.length === 0 && (
+            {paginatedJobs.length === 0 && (
               <tr><td colSpan={7} className="listings-empty">No listings found</td></tr>
             )}
           </tbody>
         </table>
       </div>
 
-      <p className="listings-count">{filtered.length} of {jobs.length} listings</p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "16px" }}>
+        <p className="listings-count" style={{ margin: 0 }}>{filtered.length} total listings</p>
+        
+        {totalPages > 1 && (
+          <div className="pagination-controls" style={{ marginTop: 0 }}>
+            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>Prev</button>
+            <span>Page {page} of {totalPages}</span>
+            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Next</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
